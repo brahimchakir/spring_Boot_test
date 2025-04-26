@@ -20,13 +20,13 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("my-springboot-app:latest")
+                    docker.build("my-springboot-app:${env.BUILD_ID}", ".")
                 }
             }
         }
         stage('Run Docker Container') {
             steps {
-                sh 'docker run -d -p 8080:8080 my-springboot-app:latest'
+                docker.image("my-springboot-app:${env.BUILD_ID}").run("-p 8080:8080")
             }
         }
     }
