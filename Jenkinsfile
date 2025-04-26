@@ -26,7 +26,8 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-                docker.image("my-springboot-app:${env.BUILD_ID}").run("-p 8080:8080")
+                sh 'docker run -p 8080:8080 my-springboot-app:${env.BUILD_ID}'
+
             }
         }
     }
