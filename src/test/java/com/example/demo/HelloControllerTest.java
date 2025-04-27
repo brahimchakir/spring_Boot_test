@@ -16,6 +16,6 @@ class HelloControllerTest {
     @Test
     void helloShouldReturnDefaultMessage() {
         String body = this.restTemplate.getForObject("/", String.class);
-        assertThat(body).isEqualTo("Hello World from Spring Boot and Jenkins CI/CD!");
+        assertThat(body).isEqualTo("Hello World from Spring boot and Jenkins CI/CD!");
     }
 }
