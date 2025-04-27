@@ -28,8 +28,6 @@ pipeline {
                         whoami
                         groups
                         ls -l /var/run/docker.sock
-                        docker --version
-                        docker version
                     '''
                     docker.build("${JD_IMAGE}", ".")
                 }
