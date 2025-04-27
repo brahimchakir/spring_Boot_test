@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-                sh "docker run -d -p 8080:8080 ${JD_IMAGE}"
+                sh "docker run -d -p 9090:8080 ${JD_IMAGE}"
             }
         }
     }
