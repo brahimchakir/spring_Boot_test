@@ -1,5 +1,5 @@
 pipeline {
-    agent 
+    agent any
     
     environment {
         JD_IMAGE = "my springboot-app:${env.BUILD_ID}"
