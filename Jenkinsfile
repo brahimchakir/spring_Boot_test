@@ -1,6 +1,9 @@
 pipeline {
-    agent any
-
+    agent 
+    
+    environment {
+        JD_IMAGE = "my springboot-app:${env.BUILD_ID}"
+    }
     stages {
         stage('Clone Repo') {
             steps {
@@ -20,15 +23,30 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("my-springboot-app:${env.BUILD_ID}", ".")
+                    sh '''
+                        echo "Docker environment:"
+                        whoami
+                        groups
+                        ls -l /var/run/docker.sock
+                        docker --version
+                        docker info --format '{{.ServerVersion}}'
+                    '''
+                    docker.build("${JD_IMAGE}", ".")
                 }
             }
         }
         stage('Run Docker Container') {
             steps {
-                sh 'docker run -p 8080:8080 my-springboot-app:${env.BUILD_ID}'
-
+                sh 'docker run -d -p 8080:8080 ${JD_IMAGE}'
             }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+        failure {
+            echo 'Pipeline failed! Check logs for details.'
         }
     }
 }
