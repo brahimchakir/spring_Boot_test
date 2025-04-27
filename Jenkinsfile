@@ -30,7 +30,7 @@ pipeline {
                         ls -l /var/run/docker.sock
                         # Set permissions explicitly
                 sudo chmod 666 /var/run/docker.sock
-                docker build -t my-springboot-app:1 .
+                sudo docker build -t my-springboot-app:1 .
                     '''
                     docker.build("${JD_IMAGE}", ".")
                 }
