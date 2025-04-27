@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    
+
     environment {
-        JD_IMAGE = "my springboot-app:${env.BUILD_ID}"
+        JD_IMAGE = "my-springboot-app:${env.BUILD_ID}"
     }
     stages {
         stage('Clone Repo') {
@@ -29,7 +29,7 @@ pipeline {
                         groups
                         ls -l /var/run/docker.sock
                         docker --version
-                        docker version'
+                        docker version
                     '''
                     docker.build("${JD_IMAGE}", ".")
                 }
@@ -37,7 +37,7 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-                sh 'docker run -d -p 8080:8080 ${JD_IMAGE}'
+                sh "docker run -d -p 8080:8080 ${JD_IMAGE}"
             }
         }
     }
