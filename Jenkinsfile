@@ -29,7 +29,7 @@ pipeline {
                         groups
                         ls -l /var/run/docker.sock
                         docker --version
-                        docker info --format '{{.ServerVersion}}'
+                        docker version'
                     '''
                     docker.build("${JD_IMAGE}", ".")
                 }
